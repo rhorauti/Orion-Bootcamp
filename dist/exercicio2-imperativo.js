@@ -1,62 +1,77 @@
 "use strict";
 // 2 - Dado o array:
-let lista = [
+let lista1 = [
     { "id": 1, "name": "Ada Lovelace", "bio": "Ada Lovelace, foi uma matemática e escritora inglesa reconhecida por ter escrito o primeiro algoritmo para ser processado por uma máquina" },
     { "id": 2, "name": "Alan Turing", "bio": "Alan Turing foi um matemático, cientista da computação, lógico, criptoanalista, filósofo e biólogo teórico britânico, ele é amplamente considerado o pai da ciência da computação teórica e da inteligência artificial" },
     { "id": 3, "name": "Nikola Tesla", "bio": "Nikola Tesla foi um inventor, engenheiro eletrotécnico e engenheiro mecânico sérvio, mais conhecido por suas contribuições ao projeto do moderno sistema de fornecimento de eletricidade em corrente alternada." },
     { "id": 4, "name": "Nicolau Copérnico", "bio": "Nicolau Copérnico foi um astrônomo e matemático polonês que desenvolveu a teoria heliocêntrica do Sistema Solar." }
 ];
-const pessoas = lista;
+const pessoasImperativo = lista;
 // a) Crie uma função que retorne a bio do id passado
-function retornarBio(idx) {
+function retornarBioImperativo(idx) {
     let isIdxValido = false;
-    for (let i = 0; i < pessoas.length; i++) {
-        if (pessoas[i].id == idx) {
+    const tamanhoArray = pessoasImperativo.length;
+    for (let i = 0; i < tamanhoArray; i++) {
+        if (pessoasImperativo[i].id == idx) {
             isIdxValido = true;
-            return console.log(pessoas[i].bio);
+            const bioSelecionada = pessoasImperativo[i].bio;
+            return bioSelecionada;
         }
     }
     if (!isIdxValido) {
         console.log('Id não encontrado!');
     }
 }
+retornarBioImperativo(5);
 // b) Crie uma função que retorne o name do id passado
-function retornarName(idx) {
+function retornarNameImperativo(idx) {
     let isIdxValido = false;
-    for (let i = 0; i < pessoas.length; i++) {
-        if (pessoas[i].id == idx) {
+    const tamanhoArray = pessoasImperativo.length;
+    for (let i = 0; i < tamanhoArray; i++) {
+        if (pessoasImperativo[i].id == idx) {
             isIdxValido = true;
-            return console.log(pessoas[i].name);
+            const nameSelecionado = pessoasImperativo[i].name;
+            return nameSelecionado;
         }
     }
     if (!isIdxValido) {
         console.log('Id não encontrado!');
     }
 }
+retornarNameImperativo(5);
 // c) Crie uma função que apague um item da lista a partir de um id passado
-function apagarItem(idx) {
+function apagarItemImperativo(idx) {
     let isIdxValido = false;
-    for (let i = 0; i < lista.length; i++) {
-        if (pessoas[i].id == idx) {
-            lista.splice(pessoas[i].id - 1, 1);
+    const tamanhoArray = pessoasImperativo.length;
+    for (let i = 0; i < tamanhoArray; i++) {
+        if (pessoasImperativo[i].id == idx) {
+            const itemExcluir = lista[i].id - 1;
+            pessoasImperativo.splice(itemExcluir, 1);
             isIdxValido = true;
         }
     }
     if (!isIdxValido) {
         console.log('Id não encontrado!');
     }
-    console.log(lista);
 }
+apagarItemImperativo(4);
 // d) Crie uma função que altere a bio ou o name a partir de um id passado
-function alterarBioOuName(idx, bio, name) {
+function alterarBioOuNameImperativo(idx, bio = '', name = '') {
     let isIdxValido = false;
-    for (let i = 0; i < lista.length; i++) {
-        if (pessoas[i].id == idx) {
-            if (bio != undefined) {
-                pessoas[i].bio = bio;
+    const tamanhoArray = pessoasImperativo.length;
+    for (let i = 0; i < tamanhoArray; i++) {
+        if (pessoasImperativo[i].id == idx) {
+            let bioSelecionada = pessoasImperativo[i].bio;
+            let nameSelecionado = pessoasImperativo[i].name;
+            if (bio != '' && name != '') {
+                bioSelecionada = bio;
+                nameSelecionado = name;
             }
-            if (name != undefined) {
-                pessoas[i].name = name;
+            else if (bio != '') {
+                bioSelecionada = bio;
+            }
+            else if (name != '') {
+                nameSelecionado = name;
             }
             isIdxValido = true;
         }
@@ -64,12 +79,7 @@ function alterarBioOuName(idx, bio, name) {
     if (!isIdxValido) {
         console.log('Id não encontrado!');
     }
-    console.log(lista);
 }
+alterarBioOuNameImperativo(2, "", "horauti");
 // e) Demonstre todas as funções com o paradigma funcional e com o imperativo
-// O paradigma funcional 
-retornarBio(7);
-retornarName(7);
-apagarItem(7);
-alterarBioOuName(7, "Horauti", "Rafael");
-// Paradigma imperativo
+// funções descritas acima estão no paradigma funcional.
