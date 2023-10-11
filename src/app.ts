@@ -20,7 +20,7 @@ const retornoQtdVogais = function retornarQtdVogais(palavra: string) : number | 
 retornoQtdVogais('bootcamp');
 //b) Dar um exemplo de uso com uma palavra recebida via input no formulário.
 
-function mostrarQtdVogais() {
+function mostrarQtdVogais() : void {
     let qtdVogaisPalavra: HTMLElement = document.getElementById('qtd-vogais-palavra');
     const arrayPalavra: Array<string> = document.getElementById('input-palavra')?.value.split('');
     if(arrayPalavra.length == 0 || arrayPalavra == null || arrayPalavra == undefined) {
@@ -31,7 +31,7 @@ function mostrarQtdVogais() {
     }
 }
 
-function limpar() {
+function limpar() : void {
     document.getElementById('input-palavra')?.value = '';
     document.getElementById('qtd-vogais-palavra')?.innerHTML = '';
 
