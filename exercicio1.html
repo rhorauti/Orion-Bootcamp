@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercício 1</title>
+
+    <style>
+
+        #container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #elementos-controle {
+            display: flex;
+            flex-direction: column;
+            width: 30%;
+        }
+
+        button {
+            color: #fff;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            padding: 0.5rem;
+            margin: 0.5rem 0;
+            font-size: 1.3rem;
+        }
+
+        #btn-calcular {
+            background-color: green;
+        }
+
+        #btn-limpar {
+            background-color: black;
+        }
+
+        #input-palavra {
+            font-size: 1.1rem;
+            padding: 0.5rem;
+        }
+
+        p {
+            font-size: 1.2rem;
+            text-align: center;
+        }
+
+    </style>
+
+</head>
+<body>
+    <div id="container">
+        <p>Calculo da quantidade de vogais em uma palavra.</p>
+        <div id="elementos-controle">
+            <input type="text" id="input-palavra">
+            <button onclick="mostrarQtdVogais()" id="btn-calcular">Calcular</button>
+            <button onclick="limpar()" id="btn-limpar">Limpar</button>
+        </div>
+        <p id="qtd-vogais-palavra">A reposta irá aparecer aqui!</p>
+    </div>
+
+    <script src="./dist/app.js"></script>
+
+</body>
+</html>
