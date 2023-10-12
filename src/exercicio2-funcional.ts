@@ -17,39 +17,39 @@ let lista: Array<Pessoa> = [
 // c) Crie uma função que apague um item da lista a partir de um id passado
 // d) Crie uma função que altere a bio ou o name a partir de um id passado
 
-function alterarBioOuName(idx:number, acao:string='', name:string='', bio:string=''):string|undefined {
+function executarAcaoTabela(idx:number, acao:string='', name:string='', bio:string=''):string|void {
     let isIdxValido:boolean = false;
-    for(let i=0; i<lista.length; i++) {
-        if(lista[i].id == idx) {
+    lista.find((d) => {
+        if(d.id == idx) {
             if(acao=='GETNAME') {
                 isIdxValido = true;
-                return lista[i].name;
+                return d.name;
             } else if(acao=='GETBIO') {
                 isIdxValido = true;
-                return lista[i].bio;
+                return d.bio;
             } else if(acao=='DEL') {
-                lista.splice(lista[i].id - 1, 1);
+                lista.splice(d.id - 1, 1);
                 isIdxValido = true;
             } else if(acao=='POST' && bio!='' && name!='') {
-                lista[i].bio = bio;
-                lista[i].name = name;
+                d.bio = bio;
+                d.name = name;
                 isIdxValido = true;
             } else if(acao=='POST' && bio!='') {
-                lista[i].bio = bio;
+                d.bio = bio;
                 isIdxValido = true;
             } else if(acao=='POST' && name!='') {
-                lista[i].name = name;
+                d.name = name;
                 isIdxValido = true;
             } else {
                 return;
             }
         } 
-    }
+    })
     if(!isIdxValido) {
         console.log('Id não encontrado!')
     }
 }
-alterarBioOuName(6, 'POST','', 'Rafael');
+executarAcaoTabela(4, 'POST', 'RAFAEL', 'HORAUTI');
 
 // e) Demonstre todas as funções com o paradigma funcional e com o imperativo
 // funções descritas acima estão no paradigma funcional.
