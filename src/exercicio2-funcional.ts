@@ -49,7 +49,7 @@ function executarAcaoTabela(idx:number, acao:string='', name:string='', bio:stri
         console.log('Id não encontrado!')
     }
 }
-executarAcaoTabela(4, 'POST', 'RAFAEL', 'HORAUTI');
+executarAcaoTabela(3, 'POST', 'RAFAEL', 'HORAUTI');
 
 // e) Demonstre todas as funções com o paradigma funcional e com o imperativo
 // funções descritas acima estão no paradigma funcional.
