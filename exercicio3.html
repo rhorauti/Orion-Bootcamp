@@ -11,6 +11,12 @@
             font-family: Arial, Helvetica, sans-serif;
         }
 
+        #area-superior {
+            border: 1px solid black;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            margin-top: 0.5rem;
+        }
         
         #container-principal {
             width: 95%;
@@ -33,24 +39,25 @@
 
         #area-conteudo {
             display: flex;
+            flex-direction: column;
         }
 
-        #area-filtro {
+        .area-filtro-alteracao {
             margin: 0.5rem 0;
         }
 
-        #area-filtro select {
+        .area-filtro-alteracao #select-filtro-alteracao, #select-filtro-bio, #select-filtro-name {
             width: 8%;
             height: 1.4rem;
             text-align: center;
             margin-right: 0.5rem;
         }
 
-        #area-filtro label {
+        .area-filtro-alteracao label {
             margin-right: 0.5rem;
         }
 
-        #area-filtro button {
+        .area-filtro-alteracao button, #btn-editar, #btn-excluir, .area-filtro-superior button {
             padding: 0.2rem 0.5rem;
             margin: 0.2rem;
             border-radius: 0.5rem;
@@ -60,7 +67,7 @@
             color: #fff;
         }
 
-        #area-filtro button:hover {
+        .area-filtro-alteracao button:hover, .area-filtro-superior button:hover {
             background-color: rgb(79, 78, 78);
         }
 
@@ -97,7 +104,7 @@
             cursor: pointer;
         }
 
-        .btn-editar {
+        /* .btn-editar {
             background-color: yellow;
         }
 
@@ -112,7 +119,7 @@
 
         .btn-excluir:hover {
             background-color: rgb(255, 123, 123);
-        }
+        } */
 
         #area-direita, #area-esquerda {
             border: 1px solid black;
@@ -143,87 +150,79 @@
 <body>
     
     <div id="container-principal">
-        <p id="titulo">Exercício 3 - Visualização das respostas do exercício 2</p>
+        <p id="titulo">Exercício 3 - Retorno do Name ou Bio</p>
         <div id="area-conteudo">
-            <div id="area-esquerda">
-                <div id="area-filtro">
+            <div id="area-superior">
+                <div class="area-filtro-superior">
                     <label>Selecione o id:</label>
-                    <select id="select-filtro" name="" id="">
-                        <option value="">1</option>
-                        <option value="">2</option>
-                        <option value="">3</option>
-                        <option value="">4</option> 
+                    <select id="select-filtro-name" name="">
+                        <option value="0">1</option>
+                        <option value="1">2</option>
+                        <option value="2">3</option>
+                        <option value="3">4</option> 
                     </select>
-                    <button id="btn-pesquisar">Pesquisar</button>
-                    <button id="btn-resetar">Resetar</button>
+                    <button class="btn-name">Pesquisar Name</button>
+                    <input type="text" style="width: 99%; margin-top: 0.5rem;margin-bottom:0.5rem" id="input-pesquisar-name">
                 </div>
-                <div>
-                    <table id="tabela-pessoa">
-                        <thead>
-                            <tr>
-                                <th>Id</th>
-                                <th>Name</th>
-                                <th>Bio</th>
-                                <th>Ações</th>
-                            </tr>
-                        </thead>
-                        <tbody class="tbody-pessoa">
-                            <!-- <tr class="tr-pessoa">
-                                <td class="id-pessoa">1</td>
-                                <td class="name-pessoa">Ada Lovelace</td>
-                                <td class="bio-pessoa">Ada Lovelace, foi uma matemática e escritora inglesa reconhecida por ter escrito o primeiro algoritmo para ser processado por uma máquina</td>
-                                <td>
-                                    <button class="btn-editar">Editar</button>
-                                    <button class="btn-excluir">Excluir</button>
-                                </td>
-                            </tr>
-                            <tr class="tr-pessoa">
-                                <td class="id-pessoa">2</td>
-                                <td class="name-pessoa">Alan Turing</td>
-                                <td class="bio-pessoa">Alan Turing foi um matemático, cientista da computação, lógico, criptoanalista, filósofo e biólogo teórico britânico, ele é amplamente considerado o pai da ciência da computação teórica e da inteligência artificial</td>
-                                <td>
-                                    <button class="btn-editar">Editar</button>
-                                    <button class="btn-excluir">Excluir</button>
-                                </td>
-                            </tr>
-                            <tr class="tr-pessoa">
-                                <td class="id-pessoa">3</td>
-                                <td class="name-pessoa">Nikola Tesla</td>
-                                <td class="bio-pessoa">Nikola Tesla foi um inventor, engenheiro eletrotécnico e engenheiro mecânico sérvio, mais conhecido por suas contribuições ao projeto do moderno sistema de fornecimento de eletricidade em corrente alternada.</td>
-                                <td>
-                                    <button class="btn-editar">Editar</button>
-                                    <button class="btn-excluir">Excluir</button>
-                                </td>
-                            </tr>
-                            <tr class="tr-pessoa">
-                                <td class="id-pessoa">4</td>
-                                <td class="name-pessoa">Nicolau Copérnico</td>
-                                <td class="bio-pessoa">Nicolau Copérnico foi um astrônomo e matemático polonês que desenvolveu a teoria heliocêntrica do Sistema Solar.</td>
-                                <td>
-                                    <button class="btn-editar">Editar</button>
-                                    <button class="btn-excluir">Excluir</button>
-                                </td>
-                            </tr> -->
-                        </tbody>
-                    </table>
+                <div class="area-filtro-superior">
+                    <label>Selecione o id:</label>
+                    <select id="select-filtro-bio" name="">
+                        <option value="0">1</option>
+                        <option value="1">2</option>
+                        <option value="2">3</option>
+                        <option value="3">4</option> 
+                    </select>
+                    <button class="btn-bio">Pesquisar Bio</button>
+                    <input type="text" style="width: 99%; margin-top: 0.5rem;" id="input-pesquisar-bio">
                 </div>
             </div>
-            <div id="area-direita" style="display: none;">
-                <p style="text-align: center;">Modal Editar item da tabela</p>
+            <p id="titulo" style="margin-bottom:1rem;">Exercício 3 - Editar e excluir registro</p>
+            <div style="display: flex;">
+                <div id="area-esquerda">
+                    <div class="area-filtro-alteracao">
+                        <label>Selecione o id:</label>
+                        <select id="select-filtro-alteracao" name="">
+                            <option value="0">1</option>
+                            <option value="1">2</option>
+                            <option value="2">3</option>
+                            <option value="3">4</option> 
+                        </select>
+                        <button id="btn-editar">Editar</button>
+                        <button id="btn-excluir">Excluir</button>
+                    </div>
                     <div>
-                        <label for="">Id</label>
-                        <input class="input-id" type="text" disabled style="background-color: #fff; border: 1px solid black; width: 100%">
+                        <table id="tabela-pessoa">
+                            <thead>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Name</th>
+                                    <th>Bio</th>
+                                </tr>
+                            </thead>
+                            <tbody class="tbody-pessoa">
+                                <!--dados da tabela-->
+                            </tbody>
+                        </table>
                     </div>
-                    <div style="width: 100%;">
-                        <label for="">Name</label>
-                        <input class="input-name" type="text" style="width: 100%">
-                    </div>
-                    <div style="width: 100%;">
-                        <label for="">Bio</label>
-                        <textarea class="input-bio" name="" id="" cols="30" rows="10" style="width: 100%"></textarea>
-                    </div>
-                    <button class="btn-salvar-alteracoes">Salvar alterações</button>
+                </div>
+                <div id="area-direita">
+                    <p style="text-align: center;">Modal Editar item da tabela</p>
+                        <div>
+                            <label for="">Id</label>
+                            <input class="input-id" type="text" disabled style="background-color: #fff; border: 1px solid black; width: 98%">
+                        </div>
+                        <div>
+                            <label for="">Name</label>
+                            <input class="input-name" type="text" style="width: 97%">
+                        </div>
+                        <div style="width: 98%;">
+                            <label for="">Bio</label>
+                            <textarea class="input-bio" name="" id="" cols="30" rows="10" style="width: 100%"></textarea>
+                        </div>
+                        <button onclick="executarAcaoTabela(3, 'POST', 'teste', 'teste bio')" class="btn-salvar-alteracoes">Salvar alterações</button>
+                </div>
             </div>
+            
         </div>
     </div>
 

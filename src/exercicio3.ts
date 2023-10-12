@@ -10,70 +10,71 @@ let listaPessoa: Array<Pessoa> = [
     {"id" : 3, "name": "Nikola Tesla", "bio" : "Nikola Tesla foi um inventor, engenheiro eletrotécnico e engenheiro mecânico sérvio, mais conhecido por suas contribuições ao projeto do moderno sistema de fornecimento de eletricidade em corrente alternada."},
     {"id" : 4, "name": "Nicolau Copérnico", "bio": "Nicolau Copérnico foi um astrônomo e matemático polonês que desenvolveu a teoria heliocêntrica do Sistema Solar."}];
 
-
-// const idPessoa = document.querySelector('.id-pessoa');
-// const namePessoa = document.querySelector('.name-pessoa');
-// const bioPessoa = document.querySelector('.bio-pessoa');
-
-
-function criarTabela() {
-    const trPessoaExistente = document.querySelector('.tr-pessoa'); 
-    if (trPessoaExistente) {
-        const parentElement = trPessoaExistente.parentElement;
-            if (parentElement) {
-                parentElement.removeChild(trPessoaExistente);
-            }
-    }
+function resetarTabela() {
+    const trPessoaExistente = document.querySelectorAll('.tr-pessoa'); 
+    for(let i=0; i<trPessoaExistente.length; i++) {
+        if (trPessoaExistente) {
+            const parentElement = trPessoaExistente[i].parentElement;
+                if (parentElement) {
+                    parentElement.removeChild(trPessoaExistente[i]);
+                }
+    }}
     const tbodyPessoa = document.querySelector('.tbody-pessoa');
     for(let i=0; i<listaPessoa.length; i++) {
         const trPessoa = document.createElement('tr');
         trPessoa.classList.add('tr-pessoa');
-        // insere coluna id na tabela 
         const tdId = document.createElement('td');
         const tdName = document.createElement('td');
         const tdBio = document.createElement('td');
-        const tdBtn = document.createElement('td');
-        const btnEditar = document.createElement('button');
-        const btnExcluir = document.createElement('button');
-        btnEditar.classList.add('btn-editar');
-        btnEditar.innerHTML = 'Editar';
-        btnExcluir.innerHTML = 'Excluir';
-        btnExcluir.classList.add('btn-excluir');
-        tdBtn.appendChild(btnEditar);
-        tdBtn.appendChild(btnExcluir);
         tdId.innerHTML = String(listaPessoa[i].id);
         tdName.innerHTML = listaPessoa[i].name
         tdBio.innerHTML = listaPessoa[i].bio
         trPessoa.appendChild(tdId);
         trPessoa.appendChild(tdName);
         trPessoa.appendChild(tdBio);
-        trPessoa.appendChild(tdBtn);
         if (tbodyPessoa) {
             tbodyPessoa.appendChild(trPessoa);
         }
     }
 }
-criarTabela()
+resetarTabela()
 
-const areaDireita:HTMLElement|null = document.querySelector('#area-direita');
-const inputId:HTMLElement|null = document.querySelector('.input-id');
-const inputName:HTMLElement|null = document.querySelector('.input-name');
-const inputBio:HTMLElement|null = document.querySelector('.input-bio');
+const selectFiltroName:HTMLSelectElement|null = document.querySelector('#select-filtro-name');
+const inputPesquisarName:HTMLInputElement|null = document.querySelector('#input-pesquisar-name');
+const btnPesquisarName:HTMLElement|null = document.querySelector('.btn-name');
 
-for(let i=0; i<listaPessoa.length; i++) {
-    const btnEditarList = document.querySelectorAll('.btn-editar');
-    btnEditarList[i].addEventListener('click', () => {
-        if(areaDireita) {
-            areaDireita ? areaDireita.style.display = 'block' : '';
-            //@ts-ignore devido ao value 
-            inputId ? inputId.value = String(listaPessoa[i].id) : '';
-            //@ts-ignore devido ao value
-            inputName ? inputName.value = listaPessoa[i].name : '';
-            //@ts-ignore devido ao value
-            inputBio ? inputBio.value = listaPessoa[i].bio : '';
-        }
-    })
-}
+btnPesquisarName?.addEventListener('click', () => {
+    const retornoName = executarAcaoTabela(listaPessoa[Number(selectFiltroName?.value)].id, 'GETNAME');
+    inputPesquisarName.value = retornoName;
+})
+
+const selectFiltroBio:HTMLSelectElement|null = document.querySelector('#select-filtro-bio');
+const inputPesquisarBio:HTMLInputElement|null = document.querySelector('#input-pesquisar-bio');
+const btnPesquisarBio:HTMLElement|null = document.querySelector('.btn-bio');
+
+btnPesquisarBio?.addEventListener('click', () => {
+    const retornoBio = executarAcaoTabela(listaPessoa[Number(selectFiltroBio?.value)].id, 'GETBIO');
+    inputPesquisarBio.value = retornoBio;
+})
+
+const selectFiltroAlteracao: HTMLSelectElement|null = document.querySelector('#select-filtro-alteracao');
+const inputId:HTMLInputElement|null = document.querySelector('.input-id');
+const inputName:HTMLInputElement|null = document.querySelector('.input-name');
+const inputBio:HTMLInputElement|null = document.querySelector('.input-bio');
+const btnEditar:HTMLElement|null = document.querySelector('#btn-editar');
+const btnExcluir:HTMLElement|null = document.querySelector('#btn-excluir');
+
+btnEditar?.addEventListener('click', () => {
+    inputId.value = String(listaPessoa[Number(selectFiltroAlteracao?.value)].id);
+    inputName.value = listaPessoa[Number(selectFiltroAlteracao?.value)].name;
+    inputBio.value = listaPessoa[Number(selectFiltroAlteracao?.value)].bio;
+})
+
+btnExcluir?.addEventListener('click', () => {
+    executarAcaoTabela(listaPessoa[Number(selectFiltroAlteracao?.value)].id, 'DEL');
+})
+   
+
 
 function executarAcaoTabela(idx:number, acao:string='', name:string='', bio:string=''):string|undefined {
     let isIdxValido:boolean = false;
@@ -101,10 +102,10 @@ function executarAcaoTabela(idx:number, acao:string='', name:string='', bio:stri
             } else {
                 return;
             }
+            resetarTabela();
         } 
     }
     if(!isIdxValido) {
-        console.log('Id não encontrado!')
+        alert('Id não encontrado!')
     }
 }
-// executarAcaoTabela(6, 'POST','', 'Rafael');
