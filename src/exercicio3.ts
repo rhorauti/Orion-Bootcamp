@@ -10,7 +10,7 @@ let listaPessoa: Array<Pessoa> = [
     {"id" : 3, "name": "Nikola Tesla", "bio" : "Nikola Tesla foi um inventor, engenheiro eletrotécnico e engenheiro mecânico sérvio, mais conhecido por suas contribuições ao projeto do moderno sistema de fornecimento de eletricidade em corrente alternada."},
     {"id" : 4, "name": "Nicolau Copérnico", "bio": "Nicolau Copérnico foi um astrônomo e matemático polonês que desenvolveu a teoria heliocêntrica do Sistema Solar."}];
 
-const selectFiltroList: null|NodeListOf<Element> = document.querySelectorAll('.select-filtro');
+const selectFiltroList: NodeListOf<HTMLSelectElement> = document.querySelectorAll('.select-filtro');
 
 function resetarTabela() {
     const trPessoaExistente = document.querySelectorAll('.tr-pessoa'); 
@@ -66,11 +66,11 @@ function resetarTabela() {
         const optionBio:HTMLOptionElement = document.createElement('option');
         const optionAcao:HTMLOptionElement = document.createElement('option');
         optionName.value = String(j);
-        optionName.innerHTML = String(j + 1);
+        optionName.innerText = String(j + 1);
         optionBio.value = String(j);
-        optionBio.innerHTML = String(j + 1);
+        optionBio.innerText = String(j + 1);
         optionAcao.value = String(j);
-        optionAcao.innerHTML = String(j + 1);
+        optionAcao.innerText = String(j + 1);
         selectName.appendChild(optionName);
         selectBio.appendChild(optionBio);
         selectAcao.appendChild(optionAcao);
@@ -80,29 +80,22 @@ function resetarTabela() {
     areaEsquerda.appendChild(selectAcao);
     
 }
-resetarTabela()
+resetarTabela();
 
-const inputPesquisarName:HTMLInputElement|null = document.querySelector('#input-pesquisar-name');
-const btnPesquisarName:HTMLElement|null = document.querySelector('.btn-name');
+const inputPesquisarName:HTMLInputElement = document.querySelector('#input-pesquisar-name');
+const btnPesquisarName:HTMLElement = document.querySelector('.btn-name');
+const selectFiltroList1: NodeListOf<HTMLSelectElement> = document.querySelectorAll('.select-filtro');
 
 btnPesquisarName?.addEventListener('click', () => {
-    const selectNameElement = selectFiltroList[0] as HTMLSelectElement;
-    console.log(selectNameElement)
-    if(selectNameElement) {
-        const retornoName = executarAcaoTabela(listaPessoa[Number(selectNameElement?.value)].id, 'GETNAME');
-        inputPesquisarName.value = retornoName;
-    }
+    // const retornoName = executarAcaoTabela(listaPessoa[Number(selectNameElement?.value)].id, 'GETNAME');
+    executarAcaoTabela(Number(selectFiltroList1[0].value) + 1, 'GETNAME');
 })
 
 const inputPesquisarBio:HTMLInputElement|null = document.querySelector('#input-pesquisar-bio');
 const btnPesquisarBio:HTMLElement|null = document.querySelector('.btn-bio');
 
 btnPesquisarBio?.addEventListener('click', () => {
-    const selectBioElement = selectFiltroList[1] as HTMLSelectElement;
-    if(selectBioElement) {
-        const retornoBio = executarAcaoTabela(listaPessoa[Number(selectBioElement?.value)].id, 'GETBIO');
-        inputPesquisarBio.value = retornoBio;
-    }
+    executarAcaoTabela(Number(selectFiltroList1[1].value ) + 1, 'GETBIO');
 })
 
 const inputId:HTMLInputElement|null = document.querySelector('.input-id');
@@ -110,55 +103,63 @@ const inputName:HTMLInputElement|null = document.querySelector('.input-name');
 const inputBio:HTMLInputElement|null = document.querySelector('.input-bio');
 const btnEditar:HTMLElement|null = document.querySelector('#btn-editar');
 const btnExcluir:HTMLElement|null = document.querySelector('#btn-excluir');
-const selectAcao = selectFiltroList[2] as HTMLSelectElement;
+const selectAcao = selectFiltroList1[2] as HTMLSelectElement;
 
 btnEditar?.addEventListener('click', () => {
-    if(selectAcao) {
-        inputId.value = String(listaPessoa[Number(selectAcao.value)].id);
-        inputName.value = listaPessoa[Number(selectAcao?.value)].name;
-        inputBio.value = listaPessoa[Number(selectAcao?.value)].bio;
-    }
+    inputId.value = String(listaPessoa[Number(selectAcao.value)].id);
+    inputName.value = listaPessoa[Number(selectAcao.value)].name;
+    inputBio.value = listaPessoa[Number(selectAcao.value)].bio;
 })
 
 btnExcluir?.addEventListener('click', () => {
-    if(selectAcao) {
-        executarAcaoTabela(listaPessoa[Number(selectAcao?.value)].id, 'DEL');
-    }
+        console.log(selectAcao.value)
+        executarAcaoTabela(Number(selectAcao.value), 'DEL');
 })
 
-function executarAcaoTabela(idx:number, acao:string='', name:string='', bio:string=''):string|undefined {
+function executarAcaoTabela(idx:number, acao:string='', name:string='', bio:string=''):string {
     let isIdxValido:boolean = false;
-    for(let i=0; i<listaPessoa.length; i++) {
-        if(listaPessoa[i].id == idx) {
+    listaPessoa.find((d) => {
+        if(d.id == idx) {
             if(acao=='GETNAME') {
                 isIdxValido = true;
-                console.log('função name')
-                return listaPessoa[i].name;
+                console.log(d.name)
+                inputPesquisarName.value = d.name;
+                return '';
             } else if(acao=='GETBIO') {
                 isIdxValido = true;
-                console.log('função bio')
-                return listaPessoa[i].bio;
+                inputPesquisarBio.value = d.bio;
+                return '';
             } else if(acao=='DEL') {
-                listaPessoa.splice(listaPessoa[i].id - 1, 1);
+                console.log('entrando na função DEL...')
+                listaPessoa.splice(d.id - 1, 1);
                 isIdxValido = true;
-                console.log('função excluir')
+                console.log(listaPessoa)
+                return '';
             } else if(acao=='POST' && bio!='' && name!='') {
-                listaPessoa[i].bio = bio;
-                listaPessoa[i].name = name;
+                d.bio = bio;
+                d.name = name;
+                inputId.value = d.bio;
+                inputName.value = d.name;
+                inputBio.value = d.bio;
                 isIdxValido = true;
+                return '';
             } else if(acao=='POST' && bio!='') {
-                listaPessoa[i].bio = bio;
+                d.bio = bio;
+                inputBio.value = d.bio;
                 isIdxValido = true;
+                return '';
             } else if(acao=='POST' && name!='') {
-                listaPessoa[i].name = name;
+                d.name = name;
+                inputName.value = d.name;
                 isIdxValido = true;
+                return '';
             } else {
-                return;
+                return '';
             }
-            resetarTabela();
         } 
-    }
+    })
     if(!isIdxValido) {
         alert('Id não encontrado!')
+        return '';
     }
 }
