@@ -104,23 +104,6 @@
             cursor: pointer;
         }
 
-        /* .btn-editar {
-            background-color: yellow;
-        }
-
-        .btn-editar:hover {
-            background-color: rgb(246, 246, 45);
-        }
-
-        .btn-excluir {
-            background-color: red;
-            color: #fff;
-        }
-
-        .btn-excluir:hover {
-            background-color: rgb(255, 123, 123);
-        } */
-
         #area-direita, #area-esquerda {
             border: 1px solid black;
             padding: 1rem;
@@ -155,23 +138,17 @@
             <div id="area-superior">
                 <div class="area-filtro-superior">
                     <label>Selecione o id:</label>
-                    <!-- <select class="select-filtro" name="">
-                        <option value="0">1</option>
-                        <option value="1">2</option>
-                        <option value="2">3</option>
-                        <option value="3">4</option> 
-                    </select> -->
+                    <select class="select-filtro" name="">
+                       <!--Option a serem inseridos-->
+                    </select>
                     <button class="btn-name">Pesquisar Name</button>
                     <input type="text" style="width: 99%; margin-top: 0.5rem;margin-bottom:0.5rem" id="input-pesquisar-name">
                 </div>
                 <div class="area-filtro-superior">
                     <label>Selecione o id:</label>
-                    <!-- <select class="select-filtro" name="">
-                        <option value="0">1</option>
-                        <option value="1">2</option>
-                        <option value="2">3</option>
-                        <option value="3">4</option> 
-                    </select> -->
+                    <select class="select-filtro" name="">
+                       <!--Option a serem inseridos-->
+                    </select>
                     <button class="btn-bio">Pesquisar Bio</button>
                     <input type="text" style="width: 99%; margin-top: 0.5rem;" id="input-pesquisar-bio">
                 </div>
@@ -181,12 +158,9 @@
                 <div id="area-esquerda">
                     <div id="area-filtro-alteracao">
                         <label>Selecione o id:</label>
-                        <!-- <select class="select-filtro" name="">
-                            <option value="0">1</option>
-                            <option value="1">2</option>
-                            <option value="2">3</option>
-                            <option value="3">4</option> 
-                        </select> -->
+                        <select class="select-filtro" name="">
+                            <!--Option a serem inseridos-->
+                        </select>
                         <button id="btn-editar">Editar</button>
                         <button id="btn-excluir">Excluir</button>
                     </div>
@@ -209,7 +183,7 @@
                     <p style="text-align: center;">Modal Editar item da tabela</p>
                         <div>
                             <label for="">Id</label>
-                            <input class="input-id" type="text" disabled style="background-color: #fff; border: 1px solid black; width: 98%">
+                            <input class="input-id"  type="text" disabled style="background-color: #fff; border: 1px solid black; width: 98%">
                         </div>
                         <div>
                             <label for="">Name</label>
@@ -219,7 +193,7 @@
                             <label for="">Bio</label>
                             <textarea class="input-bio" name="" id="" cols="30" rows="10" style="width: 100%"></textarea>
                         </div>
-                        <button onclick="executarAcaoTabela(3, 'POST', 'teste', 'teste bio')" class="btn-salvar-alteracoes">Salvar alterações</button>
+                        <button id="btn-salvar" class="btn-salvar-alteracoes">Salvar alterações</button>
                 </div>
             </div>
             

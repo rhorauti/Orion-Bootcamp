@@ -10,8 +10,6 @@ let listaPessoa: Array<Pessoa> = [
     {"id" : 3, "name": "Nikola Tesla", "bio" : "Nikola Tesla foi um inventor, engenheiro eletrotécnico e engenheiro mecânico sérvio, mais conhecido por suas contribuições ao projeto do moderno sistema de fornecimento de eletricidade em corrente alternada."},
     {"id" : 4, "name": "Nicolau Copérnico", "bio": "Nicolau Copérnico foi um astrônomo e matemático polonês que desenvolveu a teoria heliocêntrica do Sistema Solar."}];
 
-const selectFiltroList: NodeListOf<HTMLSelectElement> = document.querySelectorAll('.select-filtro');
-
 function resetarTabela() {
     const trPessoaExistente = document.querySelectorAll('.tr-pessoa'); 
     for(let i=0; i<trPessoaExistente.length; i++) {
@@ -41,125 +39,138 @@ function resetarTabela() {
         }
     }
     // criação dos select; 
-    for(let i=0; i<selectFiltroList.length; i++) {
-        if (selectFiltroList) {
-            const parentElement = selectFiltroList[i].parentElement;
+    const selectFiltroList: NodeListOf<HTMLSelectElement> = document.querySelectorAll('.select-filtro');
+    const optionFiltroList: NodeListOf<HTMLOptionElement> = document.querySelectorAll('.option-filtro');
+    for(let n=0; n<optionFiltroList.length; n++) {
+        if (optionFiltroList) {
+            const parentElement = optionFiltroList[n].parentElement;
                 if (parentElement) {
-                    parentElement.removeChild(selectFiltroList[i]);
+                    parentElement.removeChild(optionFiltroList[n]);
                 }
         }
     }
-
-    const areaSuperiorList:NodeListOf<Element> = document.querySelectorAll('.area-filtro-superior');
-    const areaSuperiorName:HTMLElement = areaSuperiorList[0] as HTMLElement;
-    const areaSuperiorBio:HTMLElement = areaSuperiorList[1] as HTMLElement;
-    const areaEsquerda = document.querySelector('#area-filtro-alteracao');
-    
-    const selectName:HTMLSelectElement = document.createElement('select');
-    const selectBio:HTMLSelectElement = document.createElement('select');
-    const selectAcao:HTMLSelectElement = document.createElement('select');
-    selectName.classList.add('select-filtro');
-    selectBio.classList.add('select-filtro');
-    selectAcao.classList.add('select-filtro');
-    for(let j=0; j<listaPessoa.length; j++) {
-        const optionName:HTMLOptionElement = document.createElement('option');
-        const optionBio:HTMLOptionElement = document.createElement('option');
-        const optionAcao:HTMLOptionElement = document.createElement('option');
-        optionName.value = String(j);
-        optionName.innerText = String(j + 1);
-        optionBio.value = String(j);
-        optionBio.innerText = String(j + 1);
-        optionAcao.value = String(j);
-        optionAcao.innerText = String(j + 1);
-        selectName.appendChild(optionName);
-        selectBio.appendChild(optionBio);
-        selectAcao.appendChild(optionAcao);
+    for(let j=0; j<selectFiltroList.length; j++) {
+        for(let k=0; k<listaPessoa.length; k++) {
+            const option:HTMLOptionElement = document.createElement('option');
+            option.classList.add('option-filtro');
+            option.value = (listaPessoa[k].id).toString();
+            option.innerHTML = (listaPessoa[k].id).toString();
+            selectFiltroList[j].appendChild(option);
+        }
     }
-    areaSuperiorName.appendChild(selectName);
-    areaSuperiorBio.appendChild(selectBio);
-    areaEsquerda.appendChild(selectAcao);
-    
+    const inputPesquisarName:HTMLInputElement = document.querySelector('#input-pesquisar-name');
+    const inputPesquisarBio:HTMLInputElement|null = document.querySelector('#input-pesquisar-bio');
+    const inputId:HTMLInputElement|null = document.querySelector('.input-id');
+    const inputName:HTMLInputElement|null = document.querySelector('.input-name');
+    const inputBio:HTMLInputElement|null = document.querySelector('.input-bio');
+    inputId.value = '';
+    inputName.value = '';
+    inputBio.value = '';
+    inputPesquisarBio.value = '';
+    inputPesquisarName.value = '';
+    selectFiltroList[0].value = '';
+    selectFiltroList[1].value = '';
+    selectFiltroList[2].value = '';
 }
+
 resetarTabela();
 
-const inputPesquisarName:HTMLInputElement = document.querySelector('#input-pesquisar-name');
-const btnPesquisarName:HTMLElement = document.querySelector('.btn-name');
-const selectFiltroList1: NodeListOf<HTMLSelectElement> = document.querySelectorAll('.select-filtro');
+window.addEventListener('DOMContentLoaded', () => {
+    const inputPesquisarName:HTMLInputElement = document.querySelector('#input-pesquisar-name');
+    const btnPesquisarName:HTMLElement = document.querySelector('.btn-name');
+    const selectFiltroList: NodeListOf<HTMLSelectElement> = document.querySelectorAll('.select-filtro');
 
-btnPesquisarName?.addEventListener('click', () => {
-    // const retornoName = executarAcaoTabela(listaPessoa[Number(selectNameElement?.value)].id, 'GETNAME');
-    executarAcaoTabela(Number(selectFiltroList1[0].value) + 1, 'GETNAME');
-})
-
-const inputPesquisarBio:HTMLInputElement|null = document.querySelector('#input-pesquisar-bio');
-const btnPesquisarBio:HTMLElement|null = document.querySelector('.btn-bio');
-
-btnPesquisarBio?.addEventListener('click', () => {
-    executarAcaoTabela(Number(selectFiltroList1[1].value ) + 1, 'GETBIO');
-})
-
-const inputId:HTMLInputElement|null = document.querySelector('.input-id');
-const inputName:HTMLInputElement|null = document.querySelector('.input-name');
-const inputBio:HTMLInputElement|null = document.querySelector('.input-bio');
-const btnEditar:HTMLElement|null = document.querySelector('#btn-editar');
-const btnExcluir:HTMLElement|null = document.querySelector('#btn-excluir');
-const selectAcao = selectFiltroList1[2] as HTMLSelectElement;
-
-btnEditar?.addEventListener('click', () => {
-    inputId.value = String(listaPessoa[Number(selectAcao.value)].id);
-    inputName.value = listaPessoa[Number(selectAcao.value)].name;
-    inputBio.value = listaPessoa[Number(selectAcao.value)].bio;
-})
-
-btnExcluir?.addEventListener('click', () => {
-        console.log(selectAcao.value)
-        executarAcaoTabela(Number(selectAcao.value), 'DEL');
-})
-
-function executarAcaoTabela(idx:number, acao:string='', name:string='', bio:string=''):string {
-    let isIdxValido:boolean = false;
-    listaPessoa.find((d) => {
-        if(d.id == idx) {
-            if(acao=='GETNAME') {
-                isIdxValido = true;
-                console.log(d.name)
-                inputPesquisarName.value = d.name;
-                return '';
-            } else if(acao=='GETBIO') {
-                isIdxValido = true;
-                inputPesquisarBio.value = d.bio;
-                return '';
-            } else if(acao=='DEL') {
-                console.log('entrando na função DEL...')
-                listaPessoa.splice(d.id - 1, 1);
-                isIdxValido = true;
-                console.log(listaPessoa)
-                return '';
-            } else if(acao=='POST' && bio!='' && name!='') {
-                d.bio = bio;
-                d.name = name;
-                inputId.value = d.bio;
-                inputName.value = d.name;
-                inputBio.value = d.bio;
-                isIdxValido = true;
-                return '';
-            } else if(acao=='POST' && bio!='') {
-                d.bio = bio;
-                inputBio.value = d.bio;
-                isIdxValido = true;
-                return '';
-            } else if(acao=='POST' && name!='') {
-                d.name = name;
-                inputName.value = d.name;
-                isIdxValido = true;
-                return '';
-            } else {
-                return '';
-            }
-        } 
+    btnPesquisarName?.addEventListener('click', () => {
+        executarAcaoTabela(Number(selectFiltroList[0].value), 'GETNAME');
     })
-    if(!isIdxValido) {
-        alert('Id não encontrado!')
-        return '';
+
+    const inputPesquisarBio:HTMLInputElement|null = document.querySelector('#input-pesquisar-bio');
+    const btnPesquisarBio:HTMLElement|null = document.querySelector('.btn-bio');
+
+    btnPesquisarBio?.addEventListener('click', () => {
+        executarAcaoTabela(Number(selectFiltroList[1].value), 'GETBIO');
+    })
+
+    const inputId:HTMLInputElement|null = document.querySelector('.input-id');
+    const inputName:HTMLInputElement|null = document.querySelector('.input-name');
+    const inputBio:HTMLInputElement|null = document.querySelector('.input-bio');
+    const btnEditar:HTMLElement|null = document.querySelector('#btn-editar');
+    const btnExcluir:HTMLElement|null = document.querySelector('#btn-excluir');
+    const btnSalvar:HTMLElement|null = document.querySelector('#btn-salvar');
+
+    const selectAcao = selectFiltroList[2] as HTMLSelectElement;
+
+    btnEditar?.addEventListener('click', () => {
+        inputId.value = String(listaPessoa[Number(selectAcao.value)-1].id);
+        inputName.value = listaPessoa[Number(selectAcao.value)-1].name;
+        inputBio.value = listaPessoa[Number(selectAcao.value)-1].bio;
+    })
+
+    btnExcluir?.addEventListener('click', () => {
+        executarAcaoTabela(Number(selectAcao.value), 'DEL');
+    })
+
+    btnSalvar?.addEventListener('click', () => {
+        executarAcaoTabela(Number(selectAcao.value), 'POST', inputName.value, inputBio.value);
+    })
+
+    function executarAcaoTabela(idx:number, acao:string='', name:string='', bio:string=''):string {
+        // const btnSalvar:HTMLElement|null = document.querySelector('#btn-salvar');
+        let isIdxValido:boolean = false;
+        listaPessoa.filter((d) => {
+            if(d.id == idx) {
+                if(acao=='GETNAME') {
+                    isIdxValido = true;
+                    console.log(d.name)
+                    inputPesquisarName.value = d.name;
+                    return '';
+                } else if(acao=='GETBIO') {
+                    isIdxValido = true;
+                    inputPesquisarBio.value = d.bio;
+                    return '';
+                } else if(acao=='DEL') {
+                    listaPessoa.splice(d.id-1, 1);
+                    isIdxValido = true;
+                    console.log(listaPessoa)
+                    resetarTabela();
+                    return '';
+                } else if(acao=='POST' && bio!='' && name!='') {
+                    // btnSalvar.setAttribute('data-name', d.name.toString());
+                    // btnSalvar.setAttribute('data-bio', d.bio.toString());
+                    d.bio = bio;
+                    d.name = name;
+                    // inputId.value = d.id.toString();
+                    // inputName.value = d.name;
+                    // inputBio.value = d.bio;
+                    console.log(listaPessoa)
+                    isIdxValido = true;
+                    resetarTabela();
+                    return '';
+                } else if(acao=='POST' && bio!='') {
+                    d.bio = bio;
+                    inputBio.value = d.bio;
+                    console.log(listaPessoa)
+                    isIdxValido = true;
+                    resetarTabela();
+                    return '';
+                } else if(acao=='POST' && name!='') {
+                    d.name = name;
+                    inputName.value = d.name;
+                    console.log(listaPessoa)
+                    isIdxValido = true;
+                    resetarTabela();
+                    return '';
+                } else {
+                    return '';
+                }
+            } 
+        })
+        if(!isIdxValido) {
+            alert('Id não encontrado!')
+            return '';
+        }
     }
-}
+})
+
+
+
