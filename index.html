@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercicio 3</title>
+
+    <style>
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        #area-superior {
+            border: 1px solid black;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            margin-top: 0.5rem;
+        }
+        
+        #container-principal {
+            width: 95%;
+            margin: 0 auto;
+        }
+        
+        label, p {
+            font-weight: 700;
+        }
+
+        #titulo { 
+            font-size: 1.2rem; 
+            font-weight: 700; 
+            text-align: center;
+            margin: 0.5rem 0;
+            background-color:black; 
+            color: #fff;
+            padding: 0.5rem;
+        }
+
+        #area-conteudo {
+            display: flex;
+            flex-direction: column;
+        }
+
+        #area-filtro-alteracao {
+            margin: 0.5rem 0;
+        }
+
+        .select-filtro {
+            width: 8%;
+            height: 1.4rem;
+            text-align: center;
+            margin-right: 0.5rem;
+        }
+
+        #area-filtro-alteracao label {
+            margin-right: 0.5rem;
+        }
+
+        #area-filtro-alteracao button, #btn-editar, #btn-excluir, .area-filtro-superior button {
+            padding: 0.2rem 0.5rem;
+            margin: 0.2rem;
+            border-radius: 0.5rem;
+            border: 1px solid black;
+            cursor: pointer;
+            background-color: black;
+            color: #fff;
+        }
+
+        #area-filtro-alteracao button:hover, .area-filtro-superior button:hover {
+            background-color: rgb(79, 78, 78);
+        }
+
+        #area-esquerda {
+            width: 60%;
+        }
+
+        #area-direita {
+            display: flex;
+            flex-direction: column;
+            margin: 0 1rem;
+            width: 40%;;
+            margin-left: 1rem;
+            margin-right: 0;
+            
+        }
+
+        td, th {
+            border: 1px solid black;
+            padding: 0.3rem;
+            text-align: center;
+        }
+
+        th {
+            font-weight: 700;
+        }
+
+        td button, #area-direita button {
+            padding: 0.3rem;
+            margin: 0.2rem auto;
+            width: 100%;
+            border-radius: 0.5rem;
+            border: 1px solid black;
+            cursor: pointer;
+        }
+
+        #area-direita, #area-esquerda {
+            border: 1px solid black;
+            padding: 1rem;
+        }
+
+        #area-direita button {
+            background-color: green;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        #area-direita button:hover {
+            background-color: rgb(80, 159, 2);
+        }
+
+        input, textarea {
+            font-family: Arial, Helvetica, sans-serif;
+            padding: 0.3rem;
+            margin: 0.2rem 0;
+        }
+
+
+
+    </style>
+
+</head>
+<body>
+    
+    <div id="container-principal">
+        <p id="titulo">Exercício 3 - Retorno do Name ou Bio</p>
+        <div id="area-conteudo">
+            <div id="area-superior">
+                <div class="area-filtro-superior">
+                    <label>Selecione o id:</label>
+                    <select class="select-filtro" name="">
+                       <!--Option a serem inseridos-->
+                    </select>
+                    <button class="btn-name">Pesquisar Name</button>
+                    <input type="text" style="width: 99%; margin-top: 0.5rem;margin-bottom:0.5rem" id="input-pesquisar-name">
+                </div>
+                <div class="area-filtro-superior">
+                    <label>Selecione o id:</label>
+                    <select class="select-filtro" name="">
+                       <!--Option a serem inseridos-->
+                    </select>
+                    <button class="btn-bio">Pesquisar Bio</button>
+                    <input type="text" style="width: 99%; margin-top: 0.5rem;" id="input-pesquisar-bio">
+                </div>
+            </div>
+            <p id="titulo" style="margin-bottom:1rem;">Exercício 3 - Editar e excluir registro</p>
+            <div style="display: flex;">
+                <div id="area-esquerda">
+                    <div id="area-filtro-alteracao">
+                        <label>Selecione o id:</label>
+                        <select class="select-filtro" name="">
+                            <!--Option a serem inseridos-->
+                        </select>
+                        <button id="btn-editar">Editar</button>
+                        <button id="btn-excluir">Excluir</button>
+                    </div>
+                    <div>
+                        <table id="tabela-pessoa">
+                            <thead>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Name</th>
+                                    <th>Bio</th>
+                                </tr>
+                            </thead>
+                            <tbody class="tbody-pessoa">
+                                <!--dados da tabela-->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div id="area-direita">
+                    <p style="text-align: center;">Modal Editar item da tabela</p>
+                        <div>
+                            <label for="">Id</label>
+                            <input class="input-id"  type="text" disabled style="background-color: #fff; border: 1px solid black; width: 98%">
+                        </div>
+                        <div>
+                            <label for="">Name</label>
+                            <input class="input-name" type="text" style="width: 97%">
+                        </div>
+                        <div style="width: 98%;">
+                            <label for="">Bio</label>
+                            <textarea class="input-bio" name="" id="" cols="30" rows="10" style="width: 100%"></textarea>
+                        </div>
+                        <button id="btn-salvar" class="btn-salvar-alteracoes">Salvar alterações</button>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    <script src="./dist/index.js"></script>
+
+</body>
+</html>
