@@ -16,7 +16,7 @@
       - name: Install dependencies
         run: npm install 
       - name: Build TypeScript
-        run: npx tsc  
+        run: npx tsc ./src
       - name: Upload artifact
         uses: actions/upload-artifact@v2
         with:
