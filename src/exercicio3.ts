@@ -116,7 +116,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
     function executarAcaoTabela(idx:number, acao:string='', name:string='', bio:string=''):string {
         let isIdxValido:boolean = false;
-        let pessoaIndex = listaPessoa.findIndex(p => p.id == idx); //splice
+        let pessoaIndex = listaPessoa.findIndex(p => p.id == idx);
         listaPessoa.forEach((d) => {
             if(d.id == idx) {
                 if(acao=='GETNAME') {
@@ -130,27 +130,23 @@ window.addEventListener('DOMContentLoaded', () => {
                 } else if(acao=='DEL') {
                     listaPessoa.splice(pessoaIndex, 1);
                     isIdxValido = true;
-                    console.log(listaPessoa)
                     resetarTabela();
                     return '';
                 } else if(acao=='POST' && bio!='' && name!='') {
                     d.bio = bio;
                     d.name = name;
-                    console.log(listaPessoa)
                     isIdxValido = true;
                     resetarTabela();
                     return '';
                 } else if(acao=='POST' && bio!='') {
                     d.bio = bio;
                     inputBio.value = d.bio;
-                    console.log(listaPessoa)
                     isIdxValido = true;
                     resetarTabela();
                     return '';
                 } else if(acao=='POST' && name!='') {
                     d.name = name;
                     inputName.value = d.name;
-                    console.log(listaPessoa)
                     isIdxValido = true;
                     resetarTabela();
                     return '';
