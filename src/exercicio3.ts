@@ -115,13 +115,13 @@ window.addEventListener('DOMContentLoaded', () => {
     })
 
     function executarAcaoTabela(idx:number, acao:string='', name:string='', bio:string=''):string {
-        // const btnSalvar:HTMLElement|null = document.querySelector('#btn-salvar');
         let isIdxValido:boolean = false;
-        listaPessoa.filter((d) => {
+        let pessoa = listaPessoa.find(p => p.id == idx); //foreach
+        let pessoaIndex = listaPessoa.findIndex(p => p.id == idx); //splice
+        listaPessoa.forEach((d) => {
             if(d.id == idx) {
                 if(acao=='GETNAME') {
                     isIdxValido = true;
-                    console.log(d.name)
                     inputPesquisarName.value = d.name;
                     return '';
                 } else if(acao=='GETBIO') {
@@ -129,19 +129,14 @@ window.addEventListener('DOMContentLoaded', () => {
                     inputPesquisarBio.value = d.bio;
                     return '';
                 } else if(acao=='DEL') {
-                    listaPessoa.splice(d.id-1, 1);
+                    listaPessoa.splice(pessoaIndex, 1);
                     isIdxValido = true;
                     console.log(listaPessoa)
                     resetarTabela();
                     return '';
                 } else if(acao=='POST' && bio!='' && name!='') {
-                    // btnSalvar.setAttribute('data-name', d.name.toString());
-                    // btnSalvar.setAttribute('data-bio', d.bio.toString());
                     d.bio = bio;
                     d.name = name;
-                    // inputId.value = d.id.toString();
-                    // inputName.value = d.name;
-                    // inputBio.value = d.bio;
                     console.log(listaPessoa)
                     isIdxValido = true;
                     resetarTabela();

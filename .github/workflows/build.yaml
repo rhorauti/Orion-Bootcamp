@@ -1,0 +1,29 @@
+name: Build Exercicio 3
+on:
+  push:
+    branches:
+      - feature/exercicio3
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+    - name: Instalar Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: 20
+    - name: Install dependencies
+      run: npm install
+    - name: Build TypeScript
+      run: npx tsc  
+    - name: Create .dist folder
+      run: mkdir .dist
+    - name: Copy JavaScript file to .dist
+      run: cp exercicio3.js .dist/
+  deploy:
+    name: Build web application
+    uses: peaceiris/actions-gh-pages@v3
+    with:
+      github-token: ${{ secrets.GITHUB_TOKEN }}
+      publish_dir: ./build
