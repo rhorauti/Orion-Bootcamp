@@ -1,6 +1,7 @@
 {
   "name": "orion-bootcamp",
   "version": "1.0.0",
+  "homepage": "orion-bootcamp/",
   "description": "\"# Orion-Bootcamp\"",
   "main": "index.js",
   "scripts": {

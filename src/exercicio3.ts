@@ -116,7 +116,6 @@ window.addEventListener('DOMContentLoaded', () => {
 
     function executarAcaoTabela(idx:number, acao:string='', name:string='', bio:string=''):string {
         let isIdxValido:boolean = false;
-        let pessoa = listaPessoa.find(p => p.id == idx); //foreach
         let pessoaIndex = listaPessoa.findIndex(p => p.id == idx); //splice
         listaPessoa.forEach((d) => {
             if(d.id == idx) {
