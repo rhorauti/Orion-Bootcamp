@@ -101,9 +101,10 @@ window.addEventListener('DOMContentLoaded', () => {
     const selectAcao = selectFiltroList[2] as HTMLSelectElement;
 
     btnEditar?.addEventListener('click', () => {
-        inputId.value = String(listaPessoa[Number(selectAcao.value)-1].id);
-        inputName.value = listaPessoa[Number(selectAcao.value)-1].name;
-        inputBio.value = listaPessoa[Number(selectAcao.value)-1].bio;
+        let pessoaIndex = listaPessoa.findIndex(p => p.id == Number(selectAcao.value));
+        inputId.value = String(listaPessoa[pessoaIndex].id);
+        inputName.value = listaPessoa[pessoaIndex].name;
+        inputBio.value = listaPessoa[pessoaIndex].bio;
     })
 
     btnExcluir?.addEventListener('click', () => {
@@ -156,7 +157,7 @@ window.addEventListener('DOMContentLoaded', () => {
             } 
         })
         if(!isIdxValido) {
-            alert('Id não encontrado!')
+            alert('Id não encontrado!!')
             return '';
         }
     }
