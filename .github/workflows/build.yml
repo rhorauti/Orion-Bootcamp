@@ -32,7 +32,8 @@
           name: dist
       - name: Copiar arquivos para gitpages
         run: |
-          cp -r dist/* ./dist
+          cp -r ${{ github.workspace }}/dist/* ./ 
+        working-directory: ${{ github.workspace }}
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
