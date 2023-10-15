@@ -2,7 +2,7 @@
   on:
     push:
       branches:
-        - feature/exercicio3
+        - develop
   jobs:
     build:
       runs-on: ubuntu-latest
