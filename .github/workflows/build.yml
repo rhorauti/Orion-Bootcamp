@@ -17,28 +17,28 @@
         run: npm install 
       - name: Build TypeScript
         run: npx tsc  
-      - name: Upload artifact
-        uses: actions/upload-artifact@v2
-        with:
-          name: dist  
-          path: dist   
+      # - name: Upload artifact
+        # uses: actions/upload-artifact@v2
+        # with:
+        #   name: dist  
+        #   path: dist   
     deploy:
       needs: build
       runs-on: ubuntu-latest
       steps:
-      - name: Download artifact
+      - name: Download artefato
         uses: actions/download-artifact@v2
         with:
           name: dist
-      - name: Copiar arquivos para gitpages
-        run: |
-          cp -r ${{ github.workspace }}/dist/* ./ 
-        working-directory: ${{ github.workspace }}
+      # - name: Copiar arquivos para gitpages
+      #   run: |
+      #     cp -r ${{ github.workspace }}/dist/* ./ 
+      #   working-directory: ${{ github.workspace }}
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./dist 
+          publish_dir: ./
 
    
 
