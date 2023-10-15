@@ -15,21 +15,13 @@
           node-version: 20 
       - name: Install dependencies
         run: npm install 
-      - name: Debug
-        run: ls -l directory_contents_before.txt
       - name: Build TypeScript
         run: npx tsc ./src
-      - name: Debug
-        run: ls -l directory_contents_after.txt
       - name: Upload artifact
         uses: actions/upload-artifact@v2
         with:
-          # name: dist  
-          # path: dist
-          name: debug
-          path: |
-            directory_contents_before.txt
-            directory_contents_after.txt   
+          name: dist  
+          path: dist
     deploy:
       needs: build
       runs-on: ubuntu-latest
