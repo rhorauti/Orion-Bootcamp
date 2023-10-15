@@ -17,6 +17,7 @@
         run: npm install 
       - name: Build TypeScript
         run: | 
+          mkdir -p ${{ github.workspace }}/dist
           cp -r ./* dist/ 
           npx tsc
         working-directory: ${{ github.workspace }} 
