@@ -1,4 +1,4 @@
-  name: Build Exercicio 3
+  name: Build develop
   on:
     push:
       branches:
@@ -18,21 +18,24 @@
       - name: Build TypeScript
         run: npx tsc  
       - name: Upload artifact
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
-          name: dist  
-          path: dist   
+          name: diretorio do index.js  
+          path: ./dist   
     deploy:
       needs: build
       runs-on: ubuntu-latest
       steps:
-      - name: Checkout do repositório
-        uses: actions/checkout@v2
+      - name: Download dos artefatos
+        uses: actions/download-artifact@v3
+        with:
+          name: Arquivo index.js
+          path: ./dist   
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./dist/**
+          publish_dir: ./dist
 
    
 
