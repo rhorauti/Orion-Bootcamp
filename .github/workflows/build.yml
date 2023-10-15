@@ -17,11 +17,11 @@
         run: npm install 
       - name: Build TypeScript
         run: npx tsc  
-      # - name: Upload artifact
-        # uses: actions/upload-artifact@v2
-        # with:
-        #   name: dist  
-        #   path: dist   
+      - name: Upload artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: dist  
+          path: dist   
     deploy:
       needs: build
       runs-on: ubuntu-latest
