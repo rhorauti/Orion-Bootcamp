@@ -1,7 +1,7 @@
 {
   "name": "orion-bootcamp",
   "version": "1.0.0",
-  "homepage": "https://github.com/rhorauti/Orion-Bootcamp.git/",
+  "homepage": "https://rhorauti.github.io/Orion-Bootcamp/",
   "description": "\"# Orion-Bootcamp\"",
   "main": "index.js",
   "scripts": {
