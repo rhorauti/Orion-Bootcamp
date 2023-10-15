@@ -20,8 +20,8 @@
       - name: Upload artifact
         uses: actions/upload-artifact@v3
         with:
-          name: diretorio do index.js  
-          path: .dist/   
+          name: dist
+          path: dist/   
     deploy:
       needs: build
       runs-on: ubuntu-latest
@@ -29,8 +29,8 @@
       - name: Download dos artefatos
         uses: actions/download-artifact@v3
         with:
-          name: Arquivo index.js
-          path: ./dist
+          name: dist
+          path: dist/
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
