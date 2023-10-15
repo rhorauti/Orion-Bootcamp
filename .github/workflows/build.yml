@@ -30,6 +30,9 @@
         uses: actions/download-artifact@v2
         with:
           name: dist
+      - name: Copiar arquivos para gitpages
+        run: |
+          cp -r dist/* ./dist
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
