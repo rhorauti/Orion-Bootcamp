@@ -22,8 +22,6 @@
           name: dist
           path: dist/   
     deploy:
-      permissions:
-        id-token: write
       needs: build
       runs-on: ubuntu-latest
       steps:
